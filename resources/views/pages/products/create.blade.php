@@ -188,6 +188,15 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product image</label>
+                                                        <div class="col-md-10">
+                                                            <input type="file" multiple class="form-control @error('images') is-invalid @enderror" name="images[]" id="images">
+
+                                                        </div>
+                                                    </div>
+
+
 
                                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                                 </form>

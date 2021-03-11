@@ -107,27 +107,27 @@ class ProductPagesController extends Controller
             }  
         }
 
-        // if($req->hasFile('images')){
+        if($req->hasFile('images')){
 
-        //     $images = $req->file('images');
+            $images = $req->file('images');
 
-        //     $new_location = 'gallery/'
-        //         . Carbon::now()->format('Y/m/')
-        //         . $prod->id .'/';
+            $new_location = 'gallery/'
+                . Carbon::now()->format('Y/m/')
+                . $prod->id .'/';
 
-        //     File::makeDirectory($new_location, $mode=0777, true, true);
+            File::makeDirectory($new_location, $mode=0777, true, true);
 
-        //     foreach ($images as $img) {
-        //         $img_ext = Str::random(10).'.'.$img->getClientOriginalExtension();
-        //         Image::make($img)->save(public_path($new_location. $img_ext));
+            foreach ($images as $img) {
+                $img_ext = Str::random(10).'.'.$img->getClientOriginalExtension();
+                Image::make($img)->save(public_path($new_location. $img_ext));
 
-        //         $gallery = new Gallery;
-        //         $gallery->product_id = $prod->id;
-        //         $gallery->images = $img_ext;
-        //         $gallery->save();
-        //     }
+                $gallery = new Gallery;
+                $gallery->product_id = $prod->id;
+                $gallery->images = $img_ext;
+                $gallery->save();
+            }
             
-        // }
+        }
 
         return redirect()->route('admin.products.create')->with('success','New Product Created Successfully');
 
