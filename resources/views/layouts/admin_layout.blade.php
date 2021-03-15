@@ -17,7 +17,7 @@
         <link href="{{asset('anotherassets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
         <link href="{{asset('anotherassets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('anotherassets/css/app.min.css')}}" rel="stylesheet" type="text/css"  id="app-stylesheet" />
-
+        <link href="{{asset('assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('anotherassets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('anotherassets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('anotherassets/libs/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" type="text/css" />
@@ -281,8 +281,56 @@
                             </li>
 
 
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-layout"></i>
+                                    <span> Blog </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    
+                                   
+                                    <li><a href="{{route('admin.posts.create')}}">Create</a></li>
+                                    <li><a href="{{route('admin.posts.list')}}">List</a></li>
+                                </ul>
+                            </li>
 
-                            {{-- @if (Route::has('login'))
+
+
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-layout"></i>
+                                    <span> Slider </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    
+                                   
+                                    <li><a href="{{route('admin.sliders.create')}}">Create</a></li>
+                                    <li><a href="{{route('admin.sliders.list')}}">List</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-layout"></i>
+                                    <span> Special Offers Table </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    
+                                   
+                                    <li><a href="{{route('admin.specialOffers.create')}}">Create</a></li>
+                                    <li><a href="{{route('admin.specialOffers.list')}}">List</a></li>
+                                </ul>
+                            </li>
+
+
+
+
+                          @if (Route::has('login'))
                             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                                 @auth
                                     <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
@@ -298,7 +346,7 @@
                                     @endif
                                 @endauth
                             </div>
-                        @endif --}}
+                        @endif
                 
                    
 

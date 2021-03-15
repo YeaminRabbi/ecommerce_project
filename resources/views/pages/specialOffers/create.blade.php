@@ -2,6 +2,9 @@
 
 @section('content')
 
+
+
+
 <div class="content-page">
     <div class="content">
         
@@ -18,45 +21,72 @@
                                 <li class="breadcrumb-item active">Basic Inputs</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Insert table</h4>
+                        <h4 class="page-title">insert table</h4>
                     </div>
                 </div>
             </div>     
             <!-- end page title --> 
 
-            @include('alert.messages')
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-                                    <h4 class="header-title">Start Writing your Slider Details</h4>
+                                    <h4 class="header-title">Start Writing your Special Offer</h4>
                                     <p class="sub-header">
                                             
                                     </p>
-
+                                    @include('alert.messages')
                                     <div class="row">
                                         <div class="col-12">
                                             <div>
-                                                <form action="{{route('admin.sizes.store')}}" enctype="multipart/form-data" method="POST">
+                                                <form action="{{route('admin.specialOffers.store')}}" enctype="multipart/form-data" method="POST">
                                                     @csrf
                                                     {{method_field('PUT')}}
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Size Name</label>
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Name</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="sizename" id="simpleinput" class="form-control" placeholder="Write a Size name which you want to add in your store" autocomplete="off">
+                                                            <input type="text" name="product_title" id="" class="form-control" placeholder="Enter your Product Title" autocomplete="off">
                                                         </div>
                                                     </div>
+                                                   
+
+                                                    
+                                                    
+                                              
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Size Slug</label>
+                                                        <label class="col-md-2 col-form-label" for="example-textarea">Enter your product Price</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="slug" id="simpleinput" class="form-control" placeholder="Write a Size slug which you want to add in your store" autocomplete="off">
+                                                            <input type="text" name="product_price" id="" class="form-control" placeholder="Write Product price" autocomplete="off">
                                                         </div>
                                                     </div>
-                                                    
-                                                    
-                                               
 
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="example-textarea">Enter how much quantity does this product available</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="product_available" id="" class="form-control" placeholder="Write how much quantity does this product available" autocomplete="off">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="example-textarea">Enter how many times this product sold</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="product_sold" id="" class="form-control" placeholder="Write how many times this product sold" autocomplete="off">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                   
+                                                    <div class="form-group row">
+                                                        <p>Select an image</p>
+                                                        <input type="file" class="filestyle" data-btnClass="btn-primary" id="image" name="image" placeholder="Enter an image">
+                                                    </div>
+
+
+                                                    <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
                                                 </form>
                                             </div>
                                         </div>

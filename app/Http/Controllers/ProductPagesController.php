@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use File;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
 use App\Product;
 use App\Brand;
 use App\Color;
 use App\Category;
 use App\Size;
 use App\SubCategory;
-
+use App\Gallary;
 use App\Attribute;
+use DB;
 class ProductPagesController extends Controller
 {
     /**
@@ -111,23 +114,42 @@ class ProductPagesController extends Controller
 
             $images = $req->file('images');
 
-            $new_location = 'gallery/'
-                . Carbon::now()->format('Y/m/')
-                . $prod->id .'/';
-
-            File::makeDirectory($new_location, $mode=0777, true, true);
-
-            foreach ($images as $img) {
-                $img_ext = Str::random(10).'.'.$img->getClientOriginalExtension();
-                Image::make($img)->save(public_path($new_location. $img_ext));
-
-                $gallery = new Gallery;
+         
+           
+            foreach ($images as $key => $img) {
+                $gallery = new Gallary;
+                Storage::putFile('public/gallery/',$img);
                 $gallery->product_id = $prod->id;
-                $gallery->images = $img_ext;
+                $gallery->images ="storage/gallery/".$img->hashName();
                 $gallery->save();
             }
             
         }
+        // if($req->hasFile('images')){
+
+        //     $images = $req->file('images');
+
+        //     $new_location = 'public/gallery/'
+        //         . Carbon::now()->format('Y/m/')
+        //         . $prod->id .'/';
+
+        //     File::makeDirectory($new_location, $mode=0777, true, true);
+
+        //     foreach ($images as $img) {
+        //         $img_ext = Str::random(10).'.'.$img->getClientOriginalExtension();
+        //         Image::make($img)->save(public_path($new_location. $img_ext));
+
+        //         $gallery = new Gallery;
+        //         $gallery->product_id = $prod->id;
+        //         $gallery->images = $img_ext;
+        //         $gallery->save();
+        //     }
+            
+        // }
+
+
+
+
 
         return redirect()->route('admin.products.create')->with('success','New Product Created Successfully');
 
@@ -157,7 +179,24 @@ class ProductPagesController extends Controller
     {
         //
         $products = Product::find($id);
-        return view('pages.products.edit',compact('products'));
+        
+        $sizes = Size::all();
+        $colors = Color::all();
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $brands       = Brand::all();
+        $gallary= Gallary::all();
+        
+        return view('pages.products.edit',[
+            'products'=>$products,
+            'sizes'=>$sizes,
+            'colors'=>$colors,     
+            'categories'=>$categories,
+            'subCategories'=>$subCategories,
+            'brands'=>$brands,
+            'gallary'=>$gallary,
+
+            ]);
     }
 
     /**
@@ -167,11 +206,64 @@ class ProductPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req)
     {
-        //
+        
+
+    
+        $product = Product::findOrFail($req->product_id);
+        $product->product_title = $req->product_title;
+        $product->slug = $req->slug;
+        $product->category_id = $req->category_id;
+        $product->subcategory_id = $req->subcategory_id;
+        $product->brand_id = $req->brand_id;
+        $product->unit_price = $req->unit_price;
+        $product->summary = $req->summary;
+        $product->description = $req->description;
+        $product->specification = $req->specification;
+        $product->save();
 
 
+        if($req->file('image')){
+            $image  = $req->file('image');
+            Storage::putFile('public/img/',$image);
+            $product->image ="storage/img/".$image->hashName();
+            $product->save();
+
+        }
+
+
+        if($req->hasFile('images')){
+
+
+            // $gallery_delete=Gallary::where('product_id', $product->id)->get();
+            // $gallery_delete->delete();
+            
+            Gallary::where('product_id', '=' ,$product->id )->delete();
+
+            $images = $req->file('images');
+
+         
+           
+            foreach ($images as $key => $img) {
+                $gallery = new Gallary;
+                Storage::putFile('public/gallery/',$img);
+                $gallery->product_id = $product->id;
+                $gallery->images ="storage/gallery/".$img->hashName();
+                $gallery->save();
+            }
+            
+        }
+       
+        
+          
+
+        
+        
+        return redirect()->route('admin.products.list')->with('success','products details updated Successfully');
+        
+
+       
 
 
 

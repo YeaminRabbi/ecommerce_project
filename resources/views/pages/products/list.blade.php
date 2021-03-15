@@ -25,7 +25,7 @@
                 <button type="button" class="btn btn-dark btn-rounded width-md waves-effect waves-light">#</button>
                 <button type="button" class="btn btn-dark btn-rounded width-md waves-effect waves-light">#</button>
             </div>
-
+            @include('alert.messages')
             <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
            
@@ -34,10 +34,15 @@
                     <th style="text-align: center;">Serial Number</th>
                     <th style="text-align: center;">Product Name</th>
                     <th style="text-align: center;">Image</th>
+                    {{-- <th style="text-align: center;">Images</th> --}}
                     <th style="text-align: center;">Attrbutes</th>
                     <th style="text-align: center;">Category</th>
+                    <th style="text-align: center;">Brand</th>
                     <th style="text-align: center;">Sub Category</th>
+                    
 
+                 
+                   
 
 
                    
@@ -57,6 +62,15 @@
                         <img style="height: 70px; width:auto;" src="{{url($product->image)}}" alt="Product Image">
                           
                     </td>
+
+                    {{-- <td>
+                        @foreach (App\Gallary::where('product_id', $product->id)->get() as $test)
+                        <img style="height: 70px; width:auto;" src="{{url($test->images)}}" alt="Product Multiple Images">
+
+                        @endforeach
+                    </td> --}}
+
+
                     <td>
                         @foreach (App\Attribute::where('product_id', $product->id)->get() as $test)
                             <span class="btn btn-pink btn-rounded width-md waves-effect waves-pink" style="margin: 5px;" >Color: {{ $test->color->colorname }}</span> |
@@ -66,6 +80,7 @@
                         @endforeach
                     </td>
                     <td>{{ $product->Category->categoryname }}</td>
+                    <td>{{ $product->brand->brandname }}</td>
                     <td>{{ $product->subcategory->subcategoryname }}</td>
                    
 
@@ -77,12 +92,12 @@
                             <a  href="{{route('admin.products.edit' , $product->id)}}" style="color: white;" class="btn btn-primary m-2"> Edit </a>
                           </div>
                           <div >
+                           
                             <form action="{{route('admin.products.destroy', $product->id)}}" method="POST">
-                              @csrf
-                              @method('Delete')
-                              <input type="submit" name="submit" value="Delete" class="btn btn-danger m-2">
-                            </form>
-                            
+                                @csrf
+                                @method('Delete')
+                                <input type="submit" name="submit" value="Delete" class="btn btn-danger m-2">
+                              </form>
                           </div>
                         </div>
                       </td>

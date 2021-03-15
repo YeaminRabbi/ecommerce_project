@@ -74,6 +74,11 @@
                                                 <a href="page-recoverpw.html" class="text-muted float-right"><small>Forgot your Password</small></a>
                                                 <label for="password">Password</label>
                                                 <input autocomplete="off" class="form-control @error('password') is-invalid @enderror" type="password" id="password" style="font-size: 24px; font-weight:bold;"  name="password" required autocomplete="new-password" placeholder="Type your password" >
+                                                
+                                                <span style="position: absolute; right:15px;transform:translate(0,0%);top:50%;cursor:pointer;">
+                                                    <i class="far fa-eye" onclick="toggle()" id="eye" style="font-size:25px; color:green"></i>
+                                                </span>
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -147,6 +152,22 @@
 
     <!-- App js -->
     <script src="{{asset('anotherassets/js/app.min.js')}}"></script>
+
+    <script>
+        var state = false;
+        function toggle(){
+            if(state){
+                document.getElementById("password").setAttribute("type","password");
+                // document.getElementById("eye").style.color='red';
+                state=false;
+            }
+            else{
+                document.getElementById("password").setAttribute("type","text");
+                document.getElementById("eye").style.color='';
+                state=true;
+            }
+        }
+            </script>
 
 </body>
 

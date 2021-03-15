@@ -22,7 +22,7 @@
                                             
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Dashboard</h4>
+                                    <h4 class="page-title">In Order to insert something you have to very your email</h4>
                                    
                                 </div>
                             </div>
@@ -36,6 +36,7 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-sm text-gray-700 underline">logout</a>
                         <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                         @csrf

@@ -45,9 +45,9 @@
             @if (count($sizes)>0)
             @foreach ($sizes as $size)
                 <tr>
-                    <td>{{$sizes->id}}</td>
-                    <td>{{$sizes->sizename}}</td>
-                    <td>{{$sizes->slug}}</td>
+                    <td>{{$size->id}}</td>
+                    <td>{{$size->sizename}}</td>
+                    <td>{{$size->slug}}</td>
 
                     <td>
                         <div class="row">

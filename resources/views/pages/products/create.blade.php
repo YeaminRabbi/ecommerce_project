@@ -1,5 +1,5 @@
 @extends('layouts.admin_layout')
-
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 @section('content')
 
 
@@ -63,7 +63,10 @@
                                                     </div>
 
 
-
+                                                    {{-- <textarea name="editor1"></textarea>
+                                                    <script>
+                                                            CKEDITOR.replace( 'editor1' );
+                                                    </script> --}}
 
 
                                                     <div class="form-group row">
@@ -88,7 +91,7 @@
                                                         <label class="col-md-2 col-form-label">Select brand Name</label>
                                                         <div class="col-md-10">
 
-                                                            <select class="form-control selectpicker" name="brand_id" data-style="btn-primary">
+                                                            <select class="form-control " name="brand_id" data-style="btn-primary" data-toggle="select2">
                                                                 @foreach ($brands as $brand)
                                                                  <option value="{{ $brand->id }}">{{ $brand->brandname }}</option>
                                                                 @endforeach
@@ -141,6 +144,7 @@
                                                                   @endforeach
                                                                 </select>
                                                             </div>
+                                                            
                                                             <label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>
                                                             <div class="col-sm-1 mg-t-10 mg-sm-t-0">
                                                               <input type="text" name="quantity[]" class="form-control" placeholder="30">
@@ -175,11 +179,6 @@
                                                             <input type="text" name="specification" id="simpleinput" class="form-control" placeholder="Write a product specification which you want to add in your store" autocomplete="off">
                                                         </div>
                                                     </div>
-                                                    
-                                                   
-                                                    
-
-
 
                                                     <div class="form-group row">
                                                         <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product image</label>

@@ -15,11 +15,10 @@
     <link href="{{asset('anotherassets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
     <link href="{{asset('anotherassets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('anotherassets/css/app.min.css')}}" rel="stylesheet" type="text/css"  id="app-stylesheet" />
-
+    
 </head>
 
 <body class="authentication-bg bg-primary authentication-bg-pattern d-flex align-items-center pb-0 vh-100">
-
     <div class="account-pages w-100 mt-5 mb-5">
         <div class="container">
 
@@ -36,11 +35,11 @@
                                             <img src="assets/images/logo-dark.png" alt="" height="30">
                                         </a>
                                     </div>
-                                    <h5 class="text-uppercase mb-1 mt-4">Sign In</h5>
+                                    <h5 class="text-uppercase mb-1 mt-4">Admin Signin</h5>
                                     <p class="mb-0">Login to your Admin account</p>
                                 </div>
 
-                                <div class="account-content mt-4">
+                                <div class="account-content mt-4 form">
                                     <form class="form-horizontal" action="{{route('login')}}" method="POST">
 
                                         @csrf
@@ -48,7 +47,7 @@
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label for="emailaddress">Email address</label>
-                                                <input name="email" class="form-control @error('email') is-invalid @enderror" style="font-size: 24px; font-weight:bold;" type="email" id="emailaddress" required="" placeholder="example@gmail.com">
+                                                <input name="email" class="form-control @error('email') is-invalid @enderror" autocomplete="off" style="font-size: 24px; font-weight:bold;" type="email" id="emailaddress" required="" placeholder="example@gmail.com">
                                                 
                                                 @error('email')
                                                 <span class="invalid-feedback is-invalid" role="alert">
@@ -65,7 +64,14 @@
                                                 <a href="page-recoverpw.html" class="text-muted float-right"><small>Forgot your password?</small></a>
                                                 <label for="password">Password</label>
                                                 <input name="password" class="form-control @error('password') is-invalid @enderror" style="font-size: 24px; font-weight:bold;" type="password" required="" id="password" placeholder="Enter your password">
-                                            </div>
+                                                <span style="position: absolute; right:15px;transform:translate(0,0%);top:50%;cursor:pointer;">
+                                                    <i class="far fa-eye" onclick="toggle()" id="eye" style="font-size:25px; color:green"></i>
+                                                </span>
+                                               
+                                             </div>
+                                           
+
+
                                             @error('password')
                                                 <span class="invalid-feedback is-invalid" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -125,6 +131,26 @@
 
     <!-- App js -->
     <script src="{{asset('anotherassets/js/app.min.js')}}"></script>
+
+
+    <script>
+var state = false;
+function toggle(){
+    if(state){
+        document.getElementById("password").setAttribute("type","password");
+        // document.getElementById("eye").style.color='red';
+        state=false;
+    }
+    else{
+        document.getElementById("password").setAttribute("type","text");
+        document.getElementById("eye").style.color='';
+        state=true;
+    }
+}
+    </script>
+
+
+
 
 </body>
 

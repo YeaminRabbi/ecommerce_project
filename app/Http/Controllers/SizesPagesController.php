@@ -14,6 +14,8 @@ class SizesPagesController extends Controller
     public function list()
     {
         //
+
+        
         $sizes = Size::all();
         return view ('pages.sizes.list',compact('sizes'));
 

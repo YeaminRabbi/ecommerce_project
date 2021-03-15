@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// This is main Home page Route Url Start
+Route::get('/', 'App\Http\Controllers\PagesController@index')->name('home');
+// This is main Home page Route Url End
 
 Route::prefix('admin')->group(function(){
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('admin.dashboard');
@@ -72,22 +74,60 @@ Route::prefix('admin')->group(function(){
     Route::put('/products/create', 'App\Http\Controllers\ProductPagesController@store')->name('admin.products.store');
     Route::get('/products/list', 'App\Http\Controllers\ProductPagesController@list')->name('admin.products.list');
     Route::get('/products/edit/{id}', 'App\Http\Controllers\ProductPagesController@edit')->name('admin.products.edit');
-    Route::post('/products/update/{id}', 'App\Http\Controllers\ProductPagesController@update')->name('admin.products.update');
+    Route::post('/products/update', 'App\Http\Controllers\ProductPagesController@update')->name('admin.products.update');
     Route::delete('/products/destroy/{id}', 'App\Http\Controllers\ProductPagesController@destroy')->name('admin.products.destroy');
+
+
+
+
+    Route::get('/posts/create', 'App\Http\Controllers\PostsPagesController@create')->name('admin.posts.create');
+    Route::put('/posts/create', 'App\Http\Controllers\PostsPagesController@store')->name('admin.posts.store');
+    Route::get('/posts/list', 'App\Http\Controllers\PostsPagesController@list')->name('admin.posts.list');
+    Route::get('/posts/edit/{id}', 'App\Http\Controllers\PostsPagesController@edit')->name('admin.posts.edit');
+    Route::post('/posts/update/{id}', 'App\Http\Controllers\PostsPagesController@update')->name('admin.posts.update');
+    Route::delete('/posts/destroy/{id}', 'App\Http\Controllers\PostsPagesController@destroy')->name('admin.posts.destroy');
+
+
+
+    Route::get('/sliders/create', 'App\Http\Controllers\SliderPagesController@create')->name('admin.sliders.create');
+    Route::put('/sliders/create', 'App\Http\Controllers\SliderPagesController@store')->name('admin.sliders.store');
+    Route::get('/sliders/list', 'App\Http\Controllers\SliderPagesController@list')->name('admin.sliders.list');
+    Route::get('/sliders/edit/{id}', 'App\Http\Controllers\SliderPagesController@edit')->name('admin.sliders.edit');
+    Route::post('/sliders/update/{id}', 'App\Http\Controllers\SliderPagesController@update')->name('admin.sliders.update');
+    Route::delete('/sliders/destroy/{id}', 'App\Http\Controllers\SliderPagesController@destroy')->name('admin.sliders.destroy');
+
+
+
+    Route::get('/specialOffers/create', 'App\Http\Controllers\SpecialOfferPagesController@create')->name('admin.specialOffers.create');
+    Route::put('/specialOffers/create', 'App\Http\Controllers\SpecialOfferPagesController@store')->name('admin.specialOffers.store');
+    Route::get('/specialOffers/list', 'App\Http\Controllers\SpecialOfferPagesController@list')->name('admin.specialOffers.list');
+    Route::get('/specialOffers/edit/{id}', 'App\Http\Controllers\SpecialOfferPagesController@edit')->name('admin.specialOffers.edit');
+    Route::post('/specialOffers/update/{id}', 'App\Http\Controllers\SpecialOfferPagesController@update')->name('admin.specialOffers.update');
+    Route::delete('/specialOffers/destroy/{id}', 'App\Http\Controllers\SpecialOfferPagesController@destroy')->name('admin.specialOffers.destroy');
+
+
+
+    
+    
 
 });
 
 
 
 
-// This is main Home page Route Url Start
-Route::get('/', 'App\Http\Controllers\PagesController@index')->name('home');
-// This is main Home page Route Url End
+
 
 
 // This is about Route Url Start
 Route::get('/about', 'App\Http\Controllers\PagesController@about')->name('about');
 // This is about Route Url End
+
+
+
+// This is about Route Url Start
+Route::get('/user', 'App\Http\Controllers\PagesController@user')->name('user');
+// This is about Route Url End
+
 
 // This is about Route Url Start
 Route::get('/cart', 'App\Http\Controllers\PagesController@cart')->name('cart');
@@ -117,8 +157,32 @@ Route::get('/terms', 'App\Http\Controllers\PagesController@terms')->name('terms'
 // This is Terms & Conditions Route Url End
 
 
+// This is allpost Route Url Start
+Route::get('/allpost', 'App\Http\Controllers\PagesController@post')->name('post');
+// This is allpost Route Url End
 
 
-Route::get('/home',function(){
-    return redirect('/admin/dashboard');
+
+Route::get('/', function () {
+    return view('pages.index');
+});
+
+Route::get('/home', function () {
+    return view('pages.dashboard');
+    // dd(\Illuminate\Support\Facades\Auth::user());
 })->middleware(['auth','verified']);
+
+
+
+
+
+Route::get('/logout',function(){
+    if(session()->has('user'))
+    {
+        session()->pull('user');
+    }
+    return redirect('login');
+});
+
+// Auth::routes();
+

@@ -39,25 +39,132 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div>
-                                                <form action="{{route('admin.sizes.update',$sizes->id)}}" enctype="multipart/form-data" method="POST">
+                                                <form action="{{route('admin.products.update')}}" enctype="multipart/form-data" method="POST">
                                                     @csrf
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Size Name</label>
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Edit your Product Name</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="sizename" value="{{$sizes->sizename}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Name">
+                                                            <input type="text" name="product_title" value="{{$products->product_title}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Name">
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Size Slug</label>
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Edit your Product Slug</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="slug" value="{{$sizes->slug}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                            <input type="text" name="slug" value="{{$products->slug}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                        </div>
+                                                    </div>
+
+
+                                                    
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">Select Category</label>
+                                                        <div class="col-md-10">
+
+                                                            <select class="form-control selectpicker" name="category_id" data-style="btn-primary">
+                                                               
+                                                                @foreach($categories as $category)
+                                                                    <option value="{{$category->id}}" {{($category->id == $products->category->id) ? 'selected' : ''}}>{{$category->categoryname}}</option>
+                                                                @endforeach  
+                                                                
+                                                                
+                                                            </select>
+                                                           
                                                         </div>
                                                     </div>
                                                   
+                                                     
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">Select brand Name</label>
+                                                        <div class="col-md-10">
+
+                                                            <select class="form-control " name="brand_id" data-style="btn-primary" data-toggle="select2">
+                                                                
+                                                                @foreach($brands as $brand)
+                                                                     <option value="{{$brand->id}}" {{($brand->id == $products->brand->id) ? 'selected' : ''}}>{{$brand->brandname}}</option>
+                                                                @endforeach 
+                                                                
+                                                            </select>
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">Select Sub Category</label>
+                                                        <div class="col-md-10">
+
+                                                            <select class="form-control selectpicker" name="subcategory_id" data-style="btn-primary">
+                                                              
+                                                                
+                                                                @foreach($subCategories as $subCategory)
+                                                                    <option value="{{$subCategory->id}}" {{($subCategory->id == $products->subcategory->id) ? 'selected' : ''}}>{{$subCategory->subcategoryname}}</option>
+                                                                @endforeach 
+                                                                
+                                                            </select>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                  
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Price</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="unit_price" value="{{$products->unit_price}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Summary</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="summary" value="{{$products->summary}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your product description</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="description" value="{{$products->description}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your product Specification</label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" name="specification" value="{{$products->specification}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                        </div>
+                                                    </div>
+
+                                                      
+                                                    <div class="form-group row">
+                                                        <p>Select an image for Thumbnail</p>
+                                                       
+                                                        <input type="file" class="filestyle" data-btnClass="btn-primary" id="image" name="image" placeholder="Enter an image">
+                                                        <img src="{{url($products->image)}}" class="img-thumbnail" style="height: 70px;width:auto;">
+                                                    </div>
+
+                                                    
+                                                    <div class="form-group row">
+                                                        <p>Select an image for Multiple Images</p>
+                                                       
+                                                        <input type="file" multiple class="filestyle @error('images') is-invalid @enderror" name="images[]" id="images">
+
+                                                        @foreach (App\Gallary::where('product_id', $products->id)->get() as $test)
+                                                        <img style="height: 70px; width:auto;" src="{{url($test->images)}}" alt="Product Multiple Images">
+                                
+                                                        @endforeach
+                                                    </div>
+
+                                                    <input type="hidden" class="filestyle" data-btnClass="btn-primary" id="product_id" name="product_id" value="{{ $products->id}}">
+
+                                                        
+                                                 
+                                                  
                                                     <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                                                    <a href="">
+                                                        <button type="submit" name="submit" class="btn btn-warning">Update Product attributes</button>
+                                                    </a>
                                                 </form>
                                             </div>
                                         </div>

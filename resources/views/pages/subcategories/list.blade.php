@@ -32,8 +32,9 @@
                 <thead>
                 <tr>
                     <th style="text-align: center;">Serial Number</th>
-                    <th style="text-align: center;">Size Names</th>
+                    <th style="text-align: center;">SubCategory Name</th>
                     <th style="text-align: center;">slug</th>
+                    <th style="text-align: center;">Category Id</th>
                    
                     <th style="text-align: center;">Action</th>
                     
@@ -42,20 +43,21 @@
 
 
                 <tbody>
-            @if (count($sizes)>0)
-            @foreach ($sizes as $size)
+            @if (count($subcategories)>0)
+            @foreach ($subcategories as $subcategory)
                 <tr>
-                    <td>{{$sizes->id}}</td>
-                    <td>{{$sizes->sizename}}</td>
-                    <td>{{$sizes->slug}}</td>
+                    <td>{{$subcategory->id}}</td>
+                    <td>{{$subcategory->subcategoryname}}</td>
+                    <td>{{$subcategory->slug}}</td>
+                    <td>{{$subcategory->category_id}}</td>
 
                     <td>
                         <div class="row">
                           <div>
-                            <a  href="{{route('admin.sizes.edit' , $size->id)}}" style="color: white;" class="btn btn-primary m-2"> Edit </a>
+                            <a  href="{{route('admin.subcategories.edit' , $subcategory->id)}}" style="color: white;" class="btn btn-primary m-2"> Edit </a>
                           </div>
                           <div >
-                            <form action="{{route('admin.sizes.destroy', $size->id)}}" method="POST">
+                            <form action="{{route('admin.subcategories.destroy', $subcategory->id)}}" method="POST">
                               @csrf
                               @method('Delete')
                               <input type="submit" name="submit" value="Delete" class="btn btn-danger m-2">

@@ -32,9 +32,10 @@
                 <thead>
                 <tr>
                     <th style="text-align: center;">Serial Number</th>
-                    <th style="text-align: center;">Size Names</th>
-                    <th style="text-align: center;">slug</th>
-                   
+                    <th style="text-align: center;">Product id</th>
+                    <th style="text-align: center;">Size id</th>
+                    <th style="text-align: center;">color id</th>
+                    <th style="text-align: center;">Quantity</th>
                     <th style="text-align: center;">Action</th>
                     
                 </tr>
@@ -42,20 +43,23 @@
 
 
                 <tbody>
-            @if (count($sizes)>0)
-            @foreach ($sizes as $size)
+            @if (count($attributes)>0)
+            @foreach ($attributes as $attribute)
                 <tr>
-                    <td>{{$sizes->id}}</td>
-                    <td>{{$sizes->sizename}}</td>
-                    <td>{{$sizes->slug}}</td>
+                    <td>{{$attribute->id}}</td>
+                    <td>{{$attribute->product_id}}</td>
+                    <td>{{$attribute->size_id}}</td>
+                    <td>{{$attribute->color_id}}</td>
+                    <td>{{$attribute->quantity}}</td>
+                    
 
                     <td>
                         <div class="row">
                           <div>
-                            <a  href="{{route('admin.sizes.edit' , $size->id)}}" style="color: white;" class="btn btn-primary m-2"> Edit </a>
+                            <a  href="{{route('admin.attributes.edit' , $attribute->id)}}" style="color: white;" class="btn btn-primary m-2"> Edit </a>
                           </div>
                           <div >
-                            <form action="{{route('admin.sizes.destroy', $size->id)}}" method="POST">
+                            <form action="{{route('admin.attributes.destroy', $attribute->id)}}" method="POST">
                               @csrf
                               @method('Delete')
                               <input type="submit" name="submit" value="Delete" class="btn btn-danger m-2">

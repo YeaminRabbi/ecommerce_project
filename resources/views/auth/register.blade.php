@@ -18,6 +18,67 @@
 
 </head>
 
+
+<style>
+    .form .form-element .password-policies {
+  position:relative;
+  top:0px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  padding:0px;
+  height:0px;
+  background:#64C5B1;
+  border-radius:5px;
+  color: black;
+  margin-top:10px;
+  box-sizing:border-box;
+  opacity:0;
+  overflow:hidden;
+  transition: height 300ms ease-in-out,
+              opacity 300ms ease-in-out;
+}
+.form .form-element .password-policies.active {
+  opacity:1;
+  padding:10px;
+  height:180px;
+}
+.form .form-element .password-policies > div {
+  margin:15px 10px;
+  font-weight:600;
+  color:#888;
+  transition:all 300ms ease-in-out;
+}
+.form .form-element .password-policies > div.active {
+  color:#111;
+}
+
+.form .form-element .toggle-password {
+  position:absolute;
+  color: green;
+  width:67px;
+  height:40px;
+  top:34px;
+  right:2px;
+  border-radius:50%;
+  text-align:center;
+  line-height:35px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+
+.form .form-element .toggle-password.active i.fa-eye {
+  display:none;
+}
+.form .form-element .toggle-password.active i.fa-eye-slash {
+  display:inline;
+}
+.form .form-element .toggle-password i.fa-eye-slash {
+  display:none;
+}
+</style>
+
 <body class="authentication-bg bg-primary authentication-bg-pattern d-flex align-items-center pb-0 vh-100">
 
     <div class="home-btn d-none d-sm-block">
@@ -40,7 +101,7 @@
                                             <img src="assets/images/logo-dark.png" alt="" height="30">
                                         </a>
                                     </div>
-                                    <h5 class="text-uppercase mb-1 mt-4">Register</h5>
+                                    <h5 class="text-uppercase mb-1 mt-4">Admin Register</h5>
                                     <p class="mb-0">Get access to our admin panel</p>
                                 </div>
 
@@ -52,7 +113,7 @@
                                         <div class="form-group row">
                                                 <div class="col-12">
                                                     <label for="username">Full Name</label>
-                                                    <input autocomplete="off" placeholder="Enter your Full Name" required autocomplete="name" autofocus class="form-control @error('name') is-invalid @enderror" type="text" id="name" required="" name="name" value="{{old('name')}}">
+                                                    <input style="font-size: 24px; font-weight:bold;" autocomplete="off" placeholder="Enter your Full Name" required autocomplete="name" autofocus class="form-control @error('name') is-invalid @enderror" type="text" id="name" required="" name="name" value="{{old('name')}}">
                                                     @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -68,7 +129,7 @@
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <label for="emailaddress">Email address</label>
-                                                <input autocomplete="off" class="form-control @error('email') is-invalid @enderror" type="email" id="email"  name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com">
+                                                <input style="font-size: 24px; font-weight:bold;" autocomplete="off" class="form-control @error('email') is-invalid @enderror" type="email" id="email"  name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com">
                                                
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -79,34 +140,62 @@
 
                                             </div>
                                         </div>
+                                    
 
 
                                    
                                    
 
-                                        <div class="form-group row">
+                                        <div class="form-group row form">
                                             
-                                            <div class="col-12">
+                                            <div class="col-12 form-element">
                                                 <a href="page-recoverpw.html" class="text-muted float-right"><small>Forgot your Password</small></a>
                                                 <label for="password">Password</label>
-                                                <input autocomplete="off" class="form-control @error('password') is-invalid @enderror" type="password" id="password"  name="password" required autocomplete="new-password" placeholder="Type your password" >
+                                                <input style="font-size: 24px; font-weight:bold;" id="password-field" autocomplete="off" class="form-control @error('password') is-invalid @enderror" type="password" id="password"  name="password" required autocomplete="new-password" placeholder="Type your password" >
+                                                
+                                                
                                                
+                                                <div class="toggle-password">
+                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </div>
+                                               
+                                                <div class="password-policies">
+                                                    <div class="policy-length">
+                                                      8 Characters
+                                                    </div>
+                                                    <div class="policy-number">
+                                                      Contains Number
+                                                    </div>
+                                                    <div class="policy-uppercase">
+                                                      Contains Uppercase
+                                                    </div>
+                                                    <div class="policy-special">
+                                                      Contains Special Characters
+                                                    </div>
+                                                 </div>
+                                             </div>
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                  @enderror
 
-                                            </div>
                                         </div>
-
+                                      
+                                    </div>
                                    
 
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <a href="page-recoverpw.html" class="text-muted float-right"><small>Forgot your Password</small></a>
                                                 <label for="password">Confirm Password</label>
-                                                <input autocomplete="off" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Enter your password again" >
+                                                <input style="font-size: 24px; font-weight:bold;" id="password-field" autocomplete="off" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Enter your password again" >
+
+
+                                               
+
                                             </div>
                                         </div>
                                         
@@ -163,6 +252,76 @@
 
     <!-- App js -->
     <script src="anotherassets/js/app.min.js"></script>
+
+    <script>
+        var state = false;
+        function toggle(){
+            if(state){
+                document.getElementById("password").setAttribute("type","password");
+                // document.getElementById("eye").style.color='red';
+                state=false;
+            }
+            else{
+                document.getElementById("password").setAttribute("type","text");
+                document.getElementById("eye").style.color='';
+                state=true;
+            }
+        }
+            </script>
+
+
+<script>
+    function _id(name){
+  return document.getElementById(name);
+}
+function _class(name){
+  return document.getElementsByClassName(name);
+}
+_class("toggle-password")[0].addEventListener("click",function(){
+  _class("toggle-password")[0].classList.toggle("active");
+  if(_id("password-field").getAttribute("type") == "password"){
+    _id("password-field").setAttribute("type","text");
+  } else {
+    _id("password-field").setAttribute("type","password");
+  }
+});
+
+_id("password-field").addEventListener("focus",function(){
+  _class("password-policies")[0].classList.add("active");
+});
+_id("password-field").addEventListener("blur",function(){
+  _class("password-policies")[0].classList.remove("active");
+});
+
+_id("password-field").addEventListener("keyup",function(){
+  let password = _id("password-field").value;
+  
+  if(/[A-Z]/.test(password)){
+    _class("policy-uppercase")[0].classList.add("active");
+  } else {
+    _class("policy-uppercase")[0].classList.remove("active");
+  }
+  
+  if(/[0-9]/.test(password)){
+    _class("policy-number")[0].classList.add("active");
+  } else {
+    _class("policy-number")[0].classList.remove("active");
+  }
+  
+  if(/[^A-Za-z0-9]/.test(password)){
+    _class("policy-special")[0].classList.add("active");
+  } else {
+    _class("policy-special")[0].classList.remove("active");
+  }
+  
+  if(password.length > 7){
+    _class("policy-length")[0].classList.add("active");
+  } else {
+    _class("policy-length")[0].classList.remove("active");
+  }
+});
+</script>
+
 
 </body>
 

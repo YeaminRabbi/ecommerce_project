@@ -39,6 +39,18 @@ class PagesController extends Controller
             return view('pages.terms');
         }
 
+        public function user(){
+            return view('pages.user');
+        }
+
+        
+    // Here we show all post 
+    public function post(){
+        $posts = Post::All();
+        return view('pages.allpost',compact('posts'));
+    }
+
+
         
     
     
