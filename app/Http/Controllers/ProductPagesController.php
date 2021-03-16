@@ -125,32 +125,7 @@ class ProductPagesController extends Controller
             }
             
         }
-        // if($req->hasFile('images')){
-
-        //     $images = $req->file('images');
-
-        //     $new_location = 'public/gallery/'
-        //         . Carbon::now()->format('Y/m/')
-        //         . $prod->id .'/';
-
-        //     File::makeDirectory($new_location, $mode=0777, true, true);
-
-        //     foreach ($images as $img) {
-        //         $img_ext = Str::random(10).'.'.$img->getClientOriginalExtension();
-        //         Image::make($img)->save(public_path($new_location. $img_ext));
-
-        //         $gallery = new Gallery;
-        //         $gallery->product_id = $prod->id;
-        //         $gallery->images = $img_ext;
-        //         $gallery->save();
-        //     }
-            
-        // }
-
-
-
-
-
+        
         return redirect()->route('admin.products.create')->with('success','New Product Created Successfully');
 
 
@@ -235,10 +210,6 @@ class ProductPagesController extends Controller
 
         if($req->hasFile('images')){
 
-
-            // $gallery_delete=Gallary::where('product_id', $product->id)->get();
-            // $gallery_delete->delete();
-            
             Gallary::where('product_id', '=' ,$product->id )->delete();
 
             $images = $req->file('images');
@@ -254,19 +225,9 @@ class ProductPagesController extends Controller
             }
             
         }
-       
-        
-          
-
-        
         
         return redirect()->route('admin.products.list')->with('success','products details updated Successfully');
         
-
-       
-
-
-
     }
 
     /**
@@ -282,5 +243,51 @@ class ProductPagesController extends Controller
         $products = Product::find($id);
         $products->delete();
         return redirect()->route('admin.products.list')->with('success',"Product Informations Deleted Successfully");
+    }
+
+
+    public function attributeedit($id)
+    {
+        $products_attribute = Attribute::where('product_id',$id)->get();
+        $sizes = Size::all();
+        $colors = Color::all();
+        $product=Product::find($id);
+
+        return view('pages.products.attribute_edit',[
+            'products_attribute'=>$products_attribute,
+            'sizes'=>$sizes,
+            'colors'=>$colors,
+            'product'=>$product
+            ]);
+
+
+    }
+
+
+    function attributeupdate(Request $req)
+    {
+        $attribute = Attribute::find($req->attribute_id);
+
+        $attribute->size_id = $req->size_id;
+        $attribute->color_id = $req->color_id;
+        $attribute->quantity = $req->quantity;
+        $attribute->save();
+
+        return back();
+    }
+
+    function attribute_add(Request $req)
+    {
+
+        foreach ($req->color_id as $key => $value) {
+            $attribute = new Attribute;
+            $attribute->product_id = $req->product_id;
+            $attribute->size_id = $req->size_id[$key];
+            $attribute->color_id = $value;
+            $attribute->quantity = $req->quantity[$key];
+            $attribute->save();
+        }  
+
+        return back();
     }
 }

@@ -162,8 +162,8 @@
                                                  
                                                   
                                                     <button type="submit" name="submit" class="btn btn-primary">Update</button>
-                                                    <a href="">
-                                                        <button type="submit" name="submit" class="btn btn-warning">Update Product attributes</button>
+                                                    <a href="{{ route('admin.products.attribute.edit', $products->id) }}" class="btn btn-warning">
+                                                        Update Product attributes
                                                     </a>
                                                 </form>
                                             </div>

@@ -76,7 +76,9 @@ Route::prefix('admin')->group(function(){
     Route::get('/products/edit/{id}', 'App\Http\Controllers\ProductPagesController@edit')->name('admin.products.edit');
     Route::post('/products/update', 'App\Http\Controllers\ProductPagesController@update')->name('admin.products.update');
     Route::delete('/products/destroy/{id}', 'App\Http\Controllers\ProductPagesController@destroy')->name('admin.products.destroy');
-
+    Route::get('/products/attribute/edit/{id}', 'App\Http\Controllers\ProductPagesController@attributeedit')->name('admin.products.attribute.edit');
+    Route::post('attribute_update', 'App\Http\Controllers\ProductPagesController@attributeupdate')->name('attribute_update');
+    Route::post('attribute_add', 'App\Http\Controllers\ProductPagesController@attribute_add')->name('attribute_add');
 
 
 
