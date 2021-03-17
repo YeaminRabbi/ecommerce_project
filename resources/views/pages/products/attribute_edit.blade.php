@@ -72,6 +72,9 @@
                                                         </div>
                                                     
                                                         <button type="submit" name="submit" class="btn btn-success">Update Attributes</button>
+                                                        
+                                                        <a  href="{{route('attribute_delete' , $products->id)}}" style="color: white;" class="btn btn-danger ml-2"> Delete </a>
+                                                       
                                                     </div><!-- row -->
                                                    
                                                 </div> 

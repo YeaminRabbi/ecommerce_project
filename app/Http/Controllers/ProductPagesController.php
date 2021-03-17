@@ -105,7 +105,14 @@ class ProductPagesController extends Controller
                 $attribute->product_id = $prod->id;
                 $attribute->size_id = $req->size_id[$key];
                 $attribute->color_id = $value;
-                $attribute->quantity = $req->quantity[$key];
+
+                if(!empty($req->quantity[$key])){
+                    $attribute->quantity = $req->quantity[$key];
+                }
+                else
+                {
+                    $attribute->quantity =0;
+                }
                 $attribute->save();
             }  
         }
@@ -284,9 +291,28 @@ class ProductPagesController extends Controller
             $attribute->product_id = $req->product_id;
             $attribute->size_id = $req->size_id[$key];
             $attribute->color_id = $value;
-            $attribute->quantity = $req->quantity[$key];
+
+            if(!empty($req->quantity[$key])){
+                $attribute->quantity = $req->quantity[$key];
+            }
+            else
+            {
+                $attribute->quantity =0;
+            }
             $attribute->save();
         }  
+
+        return back();
+    }
+
+
+
+    function attributedelete($id)
+    {
+       
+
+        $attribute_to_delete = Attribute::find($id);
+        $attribute_to_delete->delete();
 
         return back();
     }

@@ -160,11 +160,15 @@
 
                                                         
                                                  
-                                                  
-                                                    <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                                                    <a href="{{ route('admin.products.list') }}" class="btn btn-dark">Back
+                                                    </a>
+                                                    <button type="submit" name="submit" class="btn btn-primary">Update Product Details</button>
                                                     <a href="{{ route('admin.products.attribute.edit', $products->id) }}" class="btn btn-warning">
                                                         Update Product attributes
                                                     </a>
+                                                    
+
+                                                    
                                                 </form>
                                             </div>
                                         </div>
