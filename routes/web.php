@@ -109,13 +109,15 @@ Route::prefix('admin')->group(function(){
     Route::delete('/specialOffers/destroy/{id}', 'App\Http\Controllers\SpecialOfferPagesController@destroy')->name('admin.specialOffers.destroy');
 
 
-
-    
+   
     
 
 });
 
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 
 

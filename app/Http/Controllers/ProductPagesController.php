@@ -70,7 +70,7 @@ class ProductPagesController extends Controller
             'specification'=>'required|string',
             'summary'=>'required|string',
             'category_id'=>'required|string',
-            
+            'ram'=>'required',
             'subcategory_id'=>'required|string',
            
 
@@ -80,6 +80,8 @@ class ProductPagesController extends Controller
 
         if($req->hasFile('image'))
         {
+
+            // return $req->all();
             $prod = new Product;
             $image= $req->file('image');
             
@@ -105,6 +107,7 @@ class ProductPagesController extends Controller
                 $attribute->product_id = $prod->id;
                 $attribute->size_id = $req->size_id[$key];
                 $attribute->color_id = $value;
+                $attribute->ram = $req->ram[$key];
 
                 if(!empty($req->quantity[$key])){
                     $attribute->quantity = $req->quantity[$key];
@@ -113,6 +116,8 @@ class ProductPagesController extends Controller
                 {
                     $attribute->quantity =0;
                 }
+
+
                 $attribute->save();
             }  
         }
@@ -278,6 +283,7 @@ class ProductPagesController extends Controller
         $attribute->size_id = $req->size_id;
         $attribute->color_id = $req->color_id;
         $attribute->quantity = $req->quantity;
+        $attribute->ram = $req->ram;
         $attribute->save();
 
         return back();
@@ -291,7 +297,7 @@ class ProductPagesController extends Controller
             $attribute->product_id = $req->product_id;
             $attribute->size_id = $req->size_id[$key];
             $attribute->color_id = $value;
-
+            $attribute->ram = $req->ram[$key];
             if(!empty($req->quantity[$key])){
                 $attribute->quantity = $req->quantity[$key];
             }

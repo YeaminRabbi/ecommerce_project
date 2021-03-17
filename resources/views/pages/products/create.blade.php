@@ -5,7 +5,7 @@
 
 
 
-<div class="content-page">
+<div class="content-page" style="overflow-y:scroll;position:relative; height: 800px;">
     <div class="content">
         
         <!-- Start Content-->
@@ -61,12 +61,6 @@
                                                             <input type="text" name="unit_price" id="simpleinput" class="form-control" placeholder="Write a Sub Category name which you want to add in your store" autocomplete="off">
                                                         </div>
                                                     </div>
-
-
-                                                    {{-- <textarea name="editor1"></textarea>
-                                                    <script>
-                                                            CKEDITOR.replace( 'editor1' );
-                                                    </script> --}}
 
 
                                                     <div class="form-group row">
@@ -144,14 +138,25 @@
                                                                   @endforeach
                                                                 </select>
                                                             </div>
-                                                            
+
+                                                            <label for="ram" class="col-sm-2 form-control-label">{{ __('Ram')}}:</label>
+                                                            <div class="col-sm-1 mg-t-10 mg-sm-t-0">
+                                                                <select name="ram[]" id="ram" class="form-control selectpicker">
+                                                                    <option value="4GB">4GB</option>
+                                                                    <option value="8GB">8GB</option>
+                                                                    <option value="16GB">16GB</option>
+                                                                    <option value="2GB">2GB</option>
+                                                                    <option value="1GB">1GB</option>
+                                                                </select>
+                                                            </div>
+
                                                             <label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>
                                                             <div class="col-sm-1 mg-t-10 mg-sm-t-0">
                                                               <input type="text" name="quantity[]" class="form-control" placeholder="30">
                                                             </div>
                                                             {{-- ADD Button --}}
                                                             
-                                                            <span id="add" class="btn btn-primary add-more button-blue tx-uppercase mr-2">ADD</span>
+                                                            <span id="add" class="btn btn-primary add-more button-blue tx-uppercase mr-2">ADD MORE</span>
                                                             <span class="delete btn btn-primary add-more button-blue tx-uppercase mr-2">Remove</span>
                                                            
                                                         </div><!-- row -->
@@ -160,23 +165,29 @@
 
 
                                                     <div class="form-group row" style="margin-top:20px;">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Summary</label>
+                                                        <label class="col-md-2 col-form-label" for="my-editor">Enter your Product Summary</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="summary" id="simpleinput" class="form-control" placeholder="Write a Sub Category name which you want to add in your store" autocomplete="off">
+                                                            <textarea id="my-editor" name="summary" class="form-control"></textarea>
+
+                                                           
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Description</label>
+                                                        <label class="col-md-2 col-form-label" for="my-editor2">Enter your Product Description</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="description" id="simpleinput" class="form-control" placeholder="Write a Sub Category name which you want to add in your store" autocomplete="off">
+
+                                                            <textarea id="my-editor2" name="description" class="form-control"></textarea>
+                                                            
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product SPECIFICATION</label>
+                                                        <label class="col-md-2 col-form-label" for="my-editor3">Enter your Product SPECIFICATION</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="specification" id="simpleinput" class="form-control" placeholder="Write a product specification which you want to add in your store" autocomplete="off">
+                                                            
+                                                            <textarea id="my-editor3" name="specification" class="form-control"></textarea>
+                                                           
                                                         </div>
                                                     </div>
 
@@ -273,6 +284,17 @@
                              '@endforeach'+
                          '</select>'+
                      '</div>'+
+                     '<label for="ram" class="col-sm-2 form-control-label">{{ __('Ram')}}:</label>'+
+                     '<div class="col-sm-1 mg-t-10 mg-sm-t-0">'+
+                         '<select name="ram[]" id="ram" class="form-control">'+
+                            '<option value="4GB">4GB</option>'+
+                            '<option value="8GB">8GB</option>'+
+                            '<option value="16GB">16GB</option>'+
+                            '<option value="2GB">2GB</option>'+
+                            '<option value="1GB">1GB</option>'+
+                         '</select>'+
+                     '</div>'+
+                     
                      '<label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>'+
                          '<div class="col-sm-1 mg-t-10 mg-sm-t-0">'+
                              '<input type="text" name="quantity[]" class="form-control" placeholder="30">'+
@@ -286,6 +308,21 @@
      });
  </script>
 
+    <script src="//cdn.ckeditor.com/4.6.2/full-all/ckeditor.js"></script>
+    <script>
+    var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+    };
+
+    CKEDITOR.replace('my-editor', options);
+    CKEDITOR.replace('my-editor2', options);
+    CKEDITOR.replace('my-editor3', options);
+    </script>
+
+ 
 
 
 @endsection

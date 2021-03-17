@@ -118,21 +118,25 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-2 col-form-label" for="simpleinput">Enter your Product Summary</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="summary" value="{{$products->summary}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                            <textarea id="my-editor" name="summary" class="form-control">{!! $products->summary !!} </textarea>
+
+                                                            
                                                         </div>
                                                     </div>
                                                     
                                                     <div class="form-group row">
                                                         <label class="col-md-2 col-form-label" for="simpleinput">Enter your product description</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="description" value="{{$products->description}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                            <textarea id="my-editor2" name="description" class="form-control">{!! $products->description !!} </textarea>
+                                                           
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-md-2 col-form-label" for="simpleinput">Enter your product Specification</label>
                                                         <div class="col-md-10">
-                                                            <input type="text" name="specification" value="{{$products->specification}}" id="simpleinput" class="form-control" placeholder="Edit your Brand Slug">
+                                                            <textarea id="my-editor3" name="specification" class="form-control">{!! $products->specification !!} </textarea>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -215,7 +219,19 @@
 
 <script src="{{asset('anotherassets/libs/bootstrap-filestyle2/bootstrap-filestyle.min.js')}}"></script>
 
+<script src="//cdn.ckeditor.com/4.6.2/full-all/ckeditor.js"></script>
+<script>
+    var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+    };
 
+    CKEDITOR.replace('my-editor', options);
+    CKEDITOR.replace('my-editor2', options);
+    CKEDITOR.replace('my-editor3', options);
+</script>
 
 @endsection
 

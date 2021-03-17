@@ -44,7 +44,7 @@
                                                 
                                             
                                                 @foreach ($products_attribute as $products)
-                                                <form action="{{ route('attribute_update') }}" method="POST">
+                                                <form action="{{ route('attribute_update') }}" method="POST" style="border:1px solid black;padding:15px;margin-top:2px;">
                                                     @csrf
                                                 <input type="hidden" name="attribute_id" value="{{ $products->id }}">
                                                 <div id="" style="margin-bottom:20px;">
@@ -65,13 +65,24 @@
                                                                 @endforeach 
                                                             </select>
                                                         </div>
+
+                                                        <label for="ram" class="col-sm-2 form-control-label">{{ __('Ram')}}:</label>
+                                                        <div class="col-sm-1 mg-t-10 mg-sm-t-0">
+                                                            <select name="ram" id="asd" class="form-control selectpicker">
+                                                                <option value="4GB" {{("4GB" == $products->ram) ? 'selected' : ''}}>4GB</option>
+                                                                <option value="8GB" {{("8GB" == $products->ram) ? 'selected' : ''}}>8GB</option>
+                                                                <option value="16GB" {{("16GB" == $products->ram) ? 'selected' : ''}}>16GB</option>
+                                                                <option value="2GB" {{("2GB" == $products->ram) ? 'selected' : ''}}>2GB</option>
+                                                                <option value="1GB" {{("1GB" == $products->ram) ? 'selected' : ''}}>1GB</option>
+                                                            </select>
+                                                        </div>
                                                         
                                                         <label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>
                                                         <div class="col-sm-1 mg-t-10 mg-sm-t-0">
                                                           <input type="text" name="quantity" class="form-control" value="{{ $products->quantity }}" placeholder="30">
                                                         </div>
                                                     
-                                                        <button type="submit" name="submit" class="btn btn-success">Update Attributes</button>
+                                                        <button type="submit" name="submit" class="btn btn-warning">Update Attributes</button>
                                                         
                                                         <a  href="{{route('attribute_delete' , $products->id)}}" style="color: white;" class="btn btn-danger ml-2"> Delete </a>
                                                        
@@ -84,7 +95,7 @@
                                            
                                             
                                                 
-                                                <a  href="{{route('admin.products.edit' , $product->id)}}" style="color: white;" class="btn btn-dark m-2"> Back </a>
+                                                <a  href="{{route('admin.products.edit' , $product->id)}}" style="color: white;" class="btn btn-dark m-2">Back </a>
                                             </div>
                                         </div>
 
@@ -134,6 +145,17 @@
                                                             </select>
                                                         </div>
                                                         
+                                                        <label for="ram" class="col-sm-2 form-control-label">{{ __('Ram')}}:</label>
+                                                        <div class="col-sm-1 mg-t-10 mg-sm-t-0">
+                                                            <select name="ram[]" id="ram" class="form-control selectpicker">
+                                                                <option value="4GB">4GB</option>
+                                                                <option value="8GB">8GB</option>
+                                                                <option value="16GB">16GB</option>
+                                                                <option value="2GB">2GB</option>
+                                                                <option value="1GB">1GB</option>
+                                                            </select>
+                                                        </div>
+
                                                         <label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>
                                                         <div class="col-sm-1 mg-t-10 mg-sm-t-0">
                                                           <input type="text" name="quantity[]" class="form-control" placeholder="30">
@@ -146,10 +168,13 @@
                                                     </div><!-- row -->
                                                 </div>  
                                                 
-                                                <button type="submit" name="submit" class="btn btn-success" >Add Attributes</button>
+                                                <div style="margin-top: 30px;">
+                                                    <button type="submit" name="submit" class="btn btn-success" >Add Attributes</button>
                                                
-                                                <a  href="{{route('admin.products.edit' , $product->id)}}"  class="btn btn-dark m-2" > Back </a>
+                                                        <a  href="{{route('admin.products.list')}}"  class="btn btn-dark m-2" > Product List </a>
                                                 
+                                                </div>
+
                                             </form>
                                               
                                            
@@ -225,6 +250,16 @@
                              '@foreach ($sizes as $size)'+
                                  '<option value="{{ $size->id }}">{{ $size->sizename }}</option>'+
                              '@endforeach'+
+                         '</select>'+
+                     '</div>'+
+                     '<label for="ram" class="col-sm-2 form-control-label">{{ __('Ram')}}:</label>'+
+                     '<div class="col-sm-1 mg-t-10 mg-sm-t-0">'+
+                         '<select name="ram[]" id="ram" class="form-control">'+
+                            '<option value="4GB">4GB</option>'+
+                            '<option value="8GB">8GB</option>'+
+                            '<option value="16GB">16GB</option>'+
+                            '<option value="2GB">2GB</option>'+
+                            '<option value="1GB">1GB</option>'+
                          '</select>'+
                      '</div>'+
                      '<label for="quantity" class="col-sm-2 form-control-label">{{ __('Quantity')}}:</label>'+
